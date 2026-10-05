@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>흑곰선생 엑셀 원클릭 데모</title>
+<style>
+body{max-width:920px;margin:48px auto;padding:0 24px;font-family:system-ui,"Malgun Gothic",sans-serif;color:#1c1c1c;background:#fafafa}
+.card{background:#fff;border:1px solid #e5e5e5;border-radius:16px;padding:28px;margin:18px 0;box-shadow:0 3px 12px #0000000b}
+h1{margin-bottom:8px}.muted{color:#777}.row{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}button,a.demo{border:0;border-radius:10px;background:#171717;color:#fff;padding:12px 16px;text-decoration:none;font:inherit;cursor:pointer}.secondary{background:#ececec;color:#222}[hidden]{display:none!important}#log{margin-top:14px;font-size:14px;color:#555}
+</style>
+</head>
+<body>
+<h1>흑곰선생 엑셀 원클릭 데모</h1>
+<p class="muted">Chrome Web Store 심사와 기능 확인용 공개 데모입니다. 실제 업무·개인정보는 포함하지 않습니다.</p>
+<p><label for="scenario">검증 상황: </label><select id="scenario"><option value="single">단일 Excel 후보</option><option value="multiple">복수 Excel 후보</option><option value="csv">CSV 파일 다운로드</option><option value="picker">직접 지정과 사이트 기억</option></select></p>
+<div class="card" data-scenario="single"><h2>단일 Excel 후보</h2><p>확장 버튼을 누르면 이 버튼이 명확한 후보로 탐지됩니다.</p><div class="row"><button id="single">엑셀 다운로드</button><button class="secondary">PDF 다운로드</button></div></div>
+<div class="card" data-scenario="multiple" hidden><h2>복수 후보</h2><p>확장프로그램이 자동 클릭하지 않고 사용자가 원하는 항목을 고르도록 해야 합니다.</p><div class="row"><button onclick="mark('주문 엑셀 다운로드')">주문 엑셀 다운로드</button><button onclick="mark('정산내역 엑셀')">정산내역 엑셀</button></div></div>
+<div class="card" data-scenario="csv" hidden><h2>CSV 링크 후보</h2><p>가상 데이터 1행이 담긴 공개 CSV 파일을 다운로드합니다.</p><div class="row"><a class="demo" download="demo.csv" href="./demo.csv">CSV 다운로드</a></div></div>
+<div class="card" data-scenario="picker" hidden><h2>직접 지정과 사이트 기억</h2><p>키워드가 없는 버튼을 직접 지정하고, 사이트 기억과 기억 해제를 확인합니다.</p><div class="row"><button onclick="mark('보고서 받기')">보고서 받기</button></div></div>
+<p id="log" role="status">아직 실행되지 않았습니다.</p>
+<p><a href="./PRIVACY.html">개인정보 처리방침</a></p>
+<script>
+const log=document.getElementById('log');document.getElementById('single').addEventListener('click',()=>{log.textContent='원래 사이트 버튼 이벤트 실행 확인';});function mark(name){log.textContent=name+' 실행 확인';}
+const scenario=document.getElementById('scenario');scenario.addEventListener('change',()=>{document.querySelectorAll('[data-scenario]').forEach(card=>{card.hidden=card.dataset.scenario!==scenario.value;});log.textContent='아직 실행되지 않았습니다.';});
+</script>
+</body>
+</html>
+
